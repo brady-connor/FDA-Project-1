@@ -71,7 +71,13 @@ async function getDuck(){
 }
 
 function opts(id,vals,first){
-  $(id).innerHTML=
+  const el=document.getElementById(id);
+  if(!el){
+    console.warn('Missing dashboard element:',id);
+    return;
+  }
+
+  el.innerHTML=
     `<option value="all">${first}</option>`+
     vals.map(v=>`<option value="${v}">${v}</option>`).join('');
 }
