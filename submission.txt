@@ -1,4 +1,4 @@
 Brady Connor
 STUDENT ID: REPLACE WITH YOUR STUDENT ID
-REPOSITORY URL: REPLACE AFTER UPLOAD
-LIVE SITE URL: REPLACE AFTER GITHUB PAGES IS ENABLED
+https://github.com/brady-connor/FDA-Project-1
+https://brady-connor.github.io/FDA-Project-1/
