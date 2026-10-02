@@ -1,15 +1,45 @@
-<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>NBA 5-Year Data Lab</title><link rel="stylesheet" href="styles.css"></head><body>
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>NBA 5-Year Data Lab</title>
+<link rel="stylesheet" href="styles.css">
+<script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+</head>
+<body>
 <nav><div class="brand"><b>NBA</b>DATALAB</div><a href="index.html">Report</a><a href="dashboard.html">Dashboard</a><a href="#methods">Data & Methods</a></nav>
-<header class="hero"><div class="heroShade"><div class="eyebrow">FINANCIAL DATA ANALYTICS • 2021–22 TO 2025–26 NBA</div><h1>Inside five seasons of <span>NBA player production.</span></h1><p>A five-season look at NBA player production from October 19, 2021 through April 12, 2026.</p><div class="pills"><i>2021–22 to 2025–26</i><i>Regular seasons</i><i>Player-game data</i></div></div></header>
-<main class="wrap"><section class="intro"><div><div class="eyebrow">01 / THE BIG PICTURE</div><h2>Five seasons. Eight views.</h2></div><div><p>This report covers the 2021–22, 2022–23, 2023–24, 2024–25, and 2025–26 NBA regular-season player-game logs. Each row represents one player in one game. The report examines scoring, minutes, location, team context, shot volume, rebounding, assists, and three-point attempts.</p><p class="muted">The five selected season files contain 130,414 player-game rows and all 30 NBA teams.</p></div></section>
-<section class="cards"><div class="card"><small>PLAYER-GAME ROWS</small><strong>130,414</strong></div><div class="card"><small>SEASONS</small><strong>5</strong></div><div class="card"><small>NBA TEAMS</small><strong>30</strong></div><div class="card"><small>DATE RANGE</small><strong class="smallStrong">10/19/21–4/12/26</strong></div></section>
-<section class="finding"><div><div class="eyebrow">02 / SCORING</div><h2>Who carried the biggest scoring loads?</h2><p>Use the dashboard to rank teams and opponents by average player points. This section frames scoring as the first measure of production.</p></div><div class="visual"><div class="bigNum">PTS</div><p>Points per player-game</p></div></section>
-<section class="finding"><div><div class="eyebrow">03 / PLAYING TIME</div><h2>Minutes put production in context.</h2><p>Scoring, rebounds, and assists are easier to interpret when playing time is visible beside them.</p></div><div class="visual"><div class="bigNum">MIN</div><p>Minutes per player-game</p></div></section>
-<section class="finding"><div><div class="eyebrow">04 / LOCATION</div><h2>Home and road games create a clean comparison.</h2><p>The source includes a home indicator, allowing the same measures to be compared between home and road player-games.</p></div><div class="split"><b>HOME</b><b>ROAD</b></div></section>
-<section class="finding"><div><div class="eyebrow">05 / TEAM CONTEXT</div><h2>Thirty teams create meaningful group comparisons.</h2><p>Team and opponent fields make it possible to filter and compare production across every NBA franchise.</p></div><div class="visual"><div class="bigNum">30</div><p>team values</p></div></section>
-<section class="finding"><div><div class="eyebrow">06 / SHOT VOLUME</div><h2>More attempts generally create more scoring opportunity.</h2><p>Field-goal attempts can be viewed alongside points to explore how shot volume and production move together.</p></div><div class="visual"><div class="bigNum">FGA</div><p>field-goal attempts</p></div></section>
-<section class="finding"><div><div class="eyebrow">07 / REBOUNDING</div><h2>Production extends beyond scoring.</h2><p>Rebounds provide a second measure that can be ranked and compared across teams, opponents, and locations.</p></div><div class="visual"><div class="bigNum">REB</div><p>rebounds per player-game</p></div></section>
-<section class="finding"><div><div class="eyebrow">08 / PLAYMAKING</div><h2>Assists show another side of offensive production.</h2><p>The dashboard can switch from points to assists without changing the active filters.</p></div><div class="visual"><div class="bigNum">AST</div><p>assists per player-game</p></div></section>
-<section class="finding"><div><div class="eyebrow">09 / THREE-POINT VOLUME</div><h2>Three-point attempts add shooting context.</h2><p>The 3PA field can be compared with total field-goal attempts to understand how perimeter volume fits into player-game production.</p></div><div class="visual"><div class="bigNum">3PA</div><p>three-point attempts</p></div></section>
-<section id="methods" class="finding"><div><div class="eyebrow">DATA & METHODS</div><h2>Source and calculations.</h2></div><div><p>Source: cbratkovics/nba-game-logs. This project uses the 2021–22, 2022–23, 2023–24, 2024–25, and 2025–26 regular-season files, covering October 19, 2021 through April 12, 2026. One row is one player in one regular-season game. The source excludes DNP rows, playoffs, play-in, preseason, All-Star games, and the NBA Cup final.</p><p>Counts are row counts. Averages equal the sum of a statistic divided by the number of player-game rows in the selected group. The dashboard performs these calculations directly from the source Parquet file in the browser.</p></div></section>
-</main><footer>NBA Data Lab • 2021–22 to 2025–26 • Financial Data Analytics</footer></body></html>
+
+<header class="hero"><div class="heroShade">
+<div class="eyebrow">FINANCIAL DATA ANALYTICS • 2021–22 TO 2025–26 NBA</div>
+<h1>Inside five seasons of <span>NBA player production.</span></h1>
+<p><strong>Brady Connor</strong> • Financial Data Analytics</p>
+<p>A five-season analysis of NBA regular-season player-game production. The report uses 130,414 player-game rows to compare scoring, playing time, home and road performance, rebounding, playmaking, and shooting volume.</p>
+<div class="pills"><i>2021–22 to 2025–26</i><i>Regular seasons</i><i>Player-game data</i></div>
+</div></header>
+
+<main class="wrap">
+<section class="intro"><div><div class="eyebrow">01 / THE BIG PICTURE</div><h2>Five seasons. Eight findings.</h2></div><div>
+<p>This report covers the 2021–22 through 2025–26 NBA regular seasons. Each row represents one player in one game. The analysis compares production by team, season, location, and player.</p>
+<p class="muted">Every number and chart below is calculated in the browser directly from the same CSV used by the interactive dashboard.</p>
+</div></section>
+
+<section class="cards"><div class="card"><small>PLAYER-GAME ROWS</small><strong id="rRows">130,414</strong></div><div class="card"><small>SEASONS</small><strong>5</strong></div><div class="card"><small>NBA TEAMS</small><strong>30</strong></div><div class="card"><small>DATE RANGE</small><strong class="smallStrong">10/19/21–4/12/26</strong></div></section>
+<div id="reportStatus" class="status">Loading report calculations…</div>
+
+<section class="finding"><div><div class="eyebrow">02 / SCORING</div><h2 id="f1Title">Calculating the scoring leaders…</h2><p id="f1Text"></p></div><div class="chartbox"><div id="f1Chart" class="chart"></div></div></section>
+<section class="finding"><div><div class="eyebrow">03 / PLAYING TIME</div><h2 id="f2Title">Calculating playing-time trends…</h2><p id="f2Text"></p></div><div class="chartbox"><div id="f2Chart" class="chart"></div></div></section>
+<section class="finding"><div><div class="eyebrow">04 / LOCATION</div><h2 id="f3Title">Comparing home and road scoring…</h2><p id="f3Text"></p></div><div class="chartbox"><div id="f3Chart" class="chart"></div></div></section>
+<section class="finding"><div><div class="eyebrow">05 / REBOUNDING</div><h2 id="f4Title">Calculating the rebounding leaders…</h2><p id="f4Text"></p></div><div class="chartbox"><div id="f4Chart" class="chart"></div></div></section>
+<section class="finding"><div><div class="eyebrow">06 / PLAYMAKING</div><h2 id="f5Title">Calculating the assist leaders…</h2><p id="f5Text"></p></div><div class="chartbox"><div id="f5Chart" class="chart"></div></div></section>
+<section class="finding"><div><div class="eyebrow">07 / THREE-POINT VOLUME</div><h2 id="f6Title">Calculating three-point trends…</h2><p id="f6Text"></p></div><div class="chartbox"><div id="f6Chart" class="chart"></div></div></section>
+<section class="finding"><div><div class="eyebrow">08 / SHOT VOLUME</div><h2 id="f7Title">Calculating field-goal-attempt trends…</h2><p id="f7Text"></p></div><div class="chartbox"><div id="f7Chart" class="chart"></div></div></section>
+<section class="finding"><div><div class="eyebrow">09 / PLAYER SCORING</div><h2 id="f8Title">Calculating high-volume player scoring…</h2><p id="f8Text"></p></div><div class="chartbox"><div id="f8Chart" class="chart"></div></div></section>
+
+<section id="methods" class="finding"><div><div class="eyebrow">DATA & METHODS</div><h2>Source and calculations.</h2></div><div>
+<p><strong>Source:</strong> cbratkovics/nba-game-logs. This project uses the 2021–22, 2022–23, 2023–24, 2024–25, and 2025–26 regular-season player-game files, covering October 19, 2021 through April 12, 2026. One row is one player in one regular-season game. The source excludes DNP rows, playoffs, play-in, preseason, All-Star games, and the NBA Cup final.</p>
+<p>The repository combines the five season files into <code>data/player_games.csv</code>. No additional rows are dropped by this website. Counts are row counts. An average is the sum of the selected statistic divided by the number of matching player-game rows. Team and season charts use those player-game averages. The player-scoring finding requires at least 200 player-game rows so a small number of appearances cannot dominate the ranking. Both this report and the dashboard calculate from the same CSV in the browser.</p>
+</div></section>
+</main>
+<footer>NBA Data Lab • Brady Connor • 2021–22 to 2025–26 • Financial Data Analytics</footer>
+<script src="report.js?v=20261002-1"></script>
+</body></html>
