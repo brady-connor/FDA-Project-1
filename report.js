@@ -16,6 +16,13 @@ function season(measure){return group('season',measure).sort((a,b)=>a.label.loca
 function sentenceList(rows){return rows.map(x=>x.label+' ('+fmt(x.value)+')').join(', ')}
 function render(){
  $('rRows').textContent=DATA.length.toLocaleString();
+ const allAvg=key=>DATA.length?DATA.reduce((s,r)=>s+n(r[key]),0)/DATA.length:0;
+ $('rPts').textContent=fmt(allAvg('pts'));
+ $('rReb').textContent=fmt(allAvg('reb'));
+ $('rAst').textContent=fmt(allAvg('ast'));
+ $('rMin').textContent=fmt(allAvg('minutes'));
+ $('rFga').textContent=fmt(allAvg('fga'));
+ $('r3pa').textContent=fmt(allAvg('fg3a'));
 
  const a=top('team','pts'); $('f1Title').textContent=a[0].label+' led teams in average player scoring.'; $('f1Text').textContent='The five highest team averages in points per player-game were '+sentenceList(a)+'. These are player-game averages, not team points per game.'; bars('f1Chart',a);
 
