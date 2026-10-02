@@ -42,4 +42,26 @@ function render(){
 
  $('reportStatus').textContent='Report calculations complete • '+DATA.length.toLocaleString()+' player-game rows analyzed';
 }
-Papa.parse('data/player_games.csv',{download:true,header:true,skipEmptyLines:true,complete:r=>{DATA=r.data;render()},error:e=>{$('reportStatus').textContent='Report data error: '+e.message;console.error(e)}});
+function showReportError(e){
+ console.error(e);
+ const s=$('reportStatus');
+ if(s) s.textContent='Report calculation error: '+(e&&e.message?e.message:String(e));
+}
+window.addEventListener('error',e=>showReportError(e.error||e.message));
+if(typeof Papa==='undefined'){
+ showReportError(new Error('CSV reader did not load'));
+}else{
+ Papa.parse('data/player_games.csv',{
+  download:true,
+  header:true,
+  skipEmptyLines:true,
+  complete:r=>{
+   try{
+    DATA=r.data||[];
+    $('reportStatus').textContent='NBA data loaded • calculating '+DATA.length.toLocaleString()+' rows…';
+    render();
+   }catch(e){showReportError(e)}
+  },
+  error:e=>showReportError(e)
+ });
+}
